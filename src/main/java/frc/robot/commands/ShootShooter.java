@@ -4,18 +4,18 @@
 
 package frc.robot.commands;
 
-import java.util.function.BooleanSupplier;
-import java.util.function.IntSupplier;
+  import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+  import edu.wpi.first.wpilibj2.command.CommandBase;
+  import frc.robot.subsystems.Shooter;
 
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Shooter;
+  import java.util.function.BooleanSupplier;
+  import java.util.function.IntSupplier;
 
 public class ShootShooter extends CommandBase {
   private final Shooter shooter;
 
   private final BooleanSupplier shoot;
+  private final BooleanSupplier shoot2;
   private final IntSupplier POV;
 
   private double power = 0.55;
@@ -23,9 +23,10 @@ public class ShootShooter extends CommandBase {
   private boolean didSet = false;
 
   /** Creates a new ShootShooter. */
-  public ShootShooter(Shooter s, BooleanSupplier b, IntSupplier p) {
+  public ShootShooter(Shooter s, BooleanSupplier b, IntSupplier p, BooleanSupplier b2) {
     shooter = s;
     shoot = b;
+    shoot2 = b2;
     POV = p;
 
     // Use addRequirements() here to declare subsystem dependencies.
@@ -53,7 +54,8 @@ public class ShootShooter extends CommandBase {
       didSet = true;
     }
     
-    if (shoot.getAsBoolean()) {
+    boolean toggleShoot = shoot.getAsBoolean() || shoot2.getAsBoolean();
+    if (toggleShoot) {
       shooting = !shooting;
     }
 
