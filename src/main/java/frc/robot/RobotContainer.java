@@ -7,33 +7,11 @@
 
 package frc.robot;
 
-<<<<<<< HEAD
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.Climb;
-import frc.robot.commands.Drive;
-import frc.robot.commands.MoveHopper;
-import frc.robot.commands.MoveIntake;
-import frc.robot.commands.MoveTower;
-import frc.robot.commands.ShootShooter;
-import frc.robot.commands.autoCommandGroups.TestAuto;
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Hopper;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Tower;
-=======
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.*;
 import frc.robot.commands.autoCommandGroups.TestAuto;
 import frc.robot.subsystems.*;
->>>>>>> b72ea56e7bc4e81379e14a6f14cb1fd2f9840220
 
 /**
  * Le robot container
@@ -89,7 +67,6 @@ public class RobotContainer {
     }
 
     moveTower = new MoveTower(tower, () -> mano2.getBumper(GenericHID.Hand.kRight), () -> mano2.getXButton(),
-<<<<<<< HEAD
         () -> mano2.getBumper(GenericHID.Hand.kLeft), () -> stick.getRawButton(1), () -> mano2.getAButton(), () -> stick.getRawButton(3));
 
     moveHopper = new MoveHopper(hopper, () -> mano2.getXButton(), () -> mano2.getAButton(), () -> stick.getRawButton(1), () -> stick.getRawButton(3));
@@ -101,19 +78,6 @@ public class RobotContainer {
             () -> stick.getRawButton(4));
 
     climb = new Climb(climber, () -> stick.getRawButtonPressed(11), () -> stick.getRawButtonPressed(12));
-=======
-        () -> mano2.getBumper(GenericHID.Hand.kLeft), () -> stick.getRawButtonPressed(1), () -> mano2.getAButton(), () -> stick.getRawButtonPressed(3));
-
-    moveHopper = new MoveHopper(hopper, () -> mano2.getXButton(), () -> mano2.getAButton(), () -> stick.getRawButtonPressed(1), () -> stick.getRawButtonPressed(3));
-    shootShooter = new ShootShooter(shooter, () -> mano2.getYButtonPressed(), () -> mano2.getPOV(), () -> stick.getRawButtonPressed(2));
-
-      moveIntake = new MoveIntake(intake,
-          () -> (mano.getTriggerAxis(GenericHID.Hand.kRight) - mano.getTriggerAxis(GenericHID.Hand.kLeft)),
-           () -> mano.getBButton(), () -> stick.getRawButtonPressed(3), () -> stick.getRawButtonPressed(4),
-            () -> stick.getRawButtonPressed(6));
-    climb = new Climb(climber, () -> stick.getRawButtonPressed(11), () -> stick.getRawButtonPressed(12));
-
->>>>>>> b72ea56e7bc4e81379e14a6f14cb1fd2f9840220
     driveTrain.setDefaultCommand(drive);
     tower.setDefaultCommand(moveTower);
     hopper.setDefaultCommand(moveHopper);

@@ -8,14 +8,11 @@ package frc.robot.commands;
   import edu.wpi.first.wpilibj2.command.CommandBase;
   import frc.robot.subsystems.Shooter;
 
-<<<<<<< HEAD
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
-=======
   import java.util.function.BooleanSupplier;
   import java.util.function.IntSupplier;
->>>>>>> b72ea56e7bc4e81379e14a6f14cb1fd2f9840220
 
 public class ShootShooter extends CommandBase {
   private final Shooter shooter;

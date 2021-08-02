@@ -6,10 +6,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-<<<<<<< HEAD
 
-=======
->>>>>>> b72ea56e7bc4e81379e14a6f14cb1fd2f9840220
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -21,11 +18,7 @@ public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
   public Intake() {
     motor = new CANSparkMax(Constants.intakePort, MotorType.kBrushless);
-<<<<<<< HEAD
     s = new DoubleSolenoid(0,5,4);
-=======
-    s = new DoubleSolenoid(0,4,5);
->>>>>>> b72ea56e7bc4e81379e14a6f14cb1fd2f9840220
   }
 
   // public void set(boolean on) {
@@ -48,14 +41,6 @@ public class Intake extends SubsystemBase {
     s.set(Value.kForward);
   }
   
-  public void toggle() {
-    s.toggle();
-  }
-
-  public void init() {
-    s.set(Value.kReverse);
-  }
-
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
