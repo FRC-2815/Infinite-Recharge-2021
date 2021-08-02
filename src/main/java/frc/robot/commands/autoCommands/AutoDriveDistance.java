@@ -12,7 +12,7 @@ public class AutoDriveDistance extends CommandBase {
   private final DriveTrain driveTrain;
 
   private final double encoderTicks;
-  private boolean done = false;
+  private final boolean done = false;
 
   /**
    * Creates a new AutoDriveDistance.

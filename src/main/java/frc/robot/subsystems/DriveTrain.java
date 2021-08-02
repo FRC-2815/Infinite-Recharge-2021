@@ -10,7 +10,6 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -45,6 +44,8 @@ public class DriveTrain extends SubsystemBase {
     for (int i = 0; i < 2; i++) {
       talons[Constants.mainTalonPorts[i]].setInverted(false);
       
+<<<<<<< HEAD
+=======
       talons[Constants.bareTalonPorts[i]].follow(talons[Constants.mainTalonPorts[i]]);
       talons[Constants.bareTalonPorts[i]].setInverted(InvertType.FollowMaster);
     }
@@ -72,11 +73,42 @@ public class DriveTrain extends SubsystemBase {
     talons[Constants.mainTalonPorts[1]].setInverted(true);
 
     for (int i = 0; i < 2; i++) {
+>>>>>>> b72ea56e7bc4e81379e14a6f14cb1fd2f9840220
       talons[Constants.bareTalonPorts[i]].follow(talons[Constants.mainTalonPorts[i]]);
       talons[Constants.bareTalonPorts[i]].setInverted(InvertType.FollowMaster);
     }
   }
 
+<<<<<<< HEAD
+  public void configPositionDrive() {
+    for (WPI_TalonSRX talon : talons) {
+      talon.configFactoryDefault();
+      talon.setSensorPhase(true);
+      talon.setSelectedSensorPosition(0);
+
+      talon.configNominalOutputForward(0.0);
+      talon.configNominalOutputReverse(0.0);
+      talon.configPeakOutputForward(1.0);
+      talon.configPeakOutputReverse(1.0);
+
+      talon.configAllowableClosedloopError(0, 0.0);
+
+      talon.config_kF(0, 0.0);
+      talon.config_kP(0, 0.15);
+      talon.config_kI(0, 0.0);
+      talon.config_kD(0, 1.0);
+    }
+
+    talons[Constants.mainTalonPorts[1]].setInverted(true);
+
+    for (int i = 0; i < 2; i++) {
+      talons[Constants.bareTalonPorts[i]].follow(talons[Constants.mainTalonPorts[i]]);
+      talons[Constants.bareTalonPorts[i]].setInverted(InvertType.FollowMaster);
+    }
+  }
+
+=======
+>>>>>>> b72ea56e7bc4e81379e14a6f14cb1fd2f9840220
   public void driveTicks(double ticks) {
     talons[Constants.mainTalonPorts[0]].set(ControlMode.Position, ticks);
     talons[Constants.mainTalonPorts[1]].set(ControlMode.Position, ticks);

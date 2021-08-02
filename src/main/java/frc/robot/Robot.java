@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * project.
  */
 public class Robot extends TimedRobot {
-  private RobotContainer robotContainer = new RobotContainer();
+  private final RobotContainer robotContainer = new RobotContainer();
 
   /**
    * This function is called every robot packet, no matter the mode. Use this for items like
