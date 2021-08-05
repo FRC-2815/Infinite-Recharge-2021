@@ -44,6 +44,7 @@ public class RobotContainer {
   private ShootShooter shootShooter;
   private MoveIntake moveIntake;
   private Climb climb;
+  private Aim aim;
 
   public RobotContainer() {
     setup();
@@ -61,23 +62,27 @@ public class RobotContainer {
     if (driveMode.equals("trigger")) {
       drive = new Drive(driveTrain,
           () -> (mano.getTriggerAxis(GenericHID.Hand.kRight) - mano.getTriggerAxis(GenericHID.Hand.kLeft)),
-          () -> mano.getX(GenericHID.Hand.kRight));
+          () -> mano.getX(GenericHID.Hand.kRight), () -> mano2.getRawButton(9), shooter, () -> mano.getAButton(), () -> stick.getRawButtonPressed(2));
     } else {
-      drive = new Drive(driveTrain, () -> mano.getY(GenericHID.Hand.kLeft), () -> mano.getX(GenericHID.Hand.kRight));
+      drive = new Drive(driveTrain, () -> mano.getY(GenericHID.Hand.kLeft), () -> mano.getX(GenericHID.Hand.kRight), () -> stick.getRawButton(9), shooter, () -> mano2.getAButton(),
+      () -> stick.getRawButtonPressed(2));
     }
 
-    moveTower = new MoveTower(tower, () -> mano2.getBumper(GenericHID.Hand.kRight), () -> mano2.getXButton(),
-        () -> mano2.getBumper(GenericHID.Hand.kLeft), () -> stick.getRawButton(1), () -> mano2.getAButton(), () -> stick.getRawButton(3));
+    moveTower = new MoveTower(tower, () -> mano2.getXButton(),
+        () -> stick.getRawButton(1), () -> stick.getRawButton(6));
 
-    moveHopper = new MoveHopper(hopper, () -> mano2.getXButton(), () -> mano2.getAButton(), () -> stick.getRawButton(1), () -> stick.getRawButton(3));
-    shootShooter = new ShootShooter(shooter, () -> mano2.getYButtonPressed(), () -> mano2.getPOV(), () -> stick.getRawButtonPressed(2));
+    moveHopper = new MoveHopper(hopper, () -> mano2.getXButton(), () -> stick.getRawButton(1), () -> stick.getRawButton(6));
+    shootShooter = new ShootShooter(shooter, () -> mano2.getYButtonPressed(), () -> mano2.getPOV()/*, () -> stick.getRawButtonPressed(2)*/);
 
     moveIntake = new MoveIntake(intake,
           () -> (mano.getTriggerAxis(GenericHID.Hand.kRight) - mano.getTriggerAxis(GenericHID.Hand.kLeft)),
            () -> mano.getBButton(), () -> stick.getRawButtonPressed(5), () -> stick.getRawButton(3),
-            () -> stick.getRawButton(4));
+            () -> stick.getRawButton(4), () -> mano.getBumper(GenericHID.Hand.kRight), () -> mano.getBumper(GenericHID.Hand.kLeft));
 
     climb = new Climb(climber, () -> stick.getRawButtonPressed(11), () -> stick.getRawButtonPressed(12));
+
+    aim = new Aim(stick.getRawButton(9));
+    
     driveTrain.setDefaultCommand(drive);
     tower.setDefaultCommand(moveTower);
     hopper.setDefaultCommand(moveHopper);
@@ -98,6 +103,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public SequentialCommandGroup getAutonomousCommand() {
-    return new TestAuto(driveTrain);
+    return new TestAuto(driveTrain, shooter, hopper, tower);
   }
 }

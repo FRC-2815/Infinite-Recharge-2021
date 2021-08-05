@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 
-public class AutoDriveDistance extends CommandBase {
+public class AutoTurnAngle extends CommandBase {
   private final DriveTrain driveTrain;
 
   private final double encoderTicks;
@@ -18,7 +18,7 @@ public class AutoDriveDistance extends CommandBase {
    * Creates a new AutoDriveDistance.
    * (drivetrain, wheel circumference (inches), gearbox ratio, distance inches, power)
    */
-  public AutoDriveDistance(DriveTrain d, double i) {
+  public AutoTurnAngle(DriveTrain d, double i) {
     driveTrain = d;
     encoderTicks = (i / Constants.wheelCircumference) * 4096;
 
