@@ -17,7 +17,6 @@ import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
   private final WPI_TalonSRX[] talons = new WPI_TalonSRX[4];
-
   private final DifferentialDrive botDrive;
 
   
