@@ -4,52 +4,52 @@
 
 package frc.robot.commands.autoCommands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Shooter;
 
-public class AutoDriveDistance extends CommandBase {
-  private final DriveTrain driveTrain;
+public class AutoSetShooter extends CommandBase {
+  private final Shooter shooter;
 
-  private final double encoderTicks;
+  private final double power;
+
   private boolean done = false;
 
-  /**
-   * Creates a new AutoDriveDistance.
-   * (drivetrain, wheel circumference (inches), gearbox ratio, distance inches, power)
-   */
-  public AutoDriveDistance(DriveTrain d, double i) {
-    driveTrain = d;
-    encoderTicks = (i / Constants.wheelCircumference) * 4096;
-
+  /** Creates a new AutoShooter. */
+  public AutoSetShooter(Shooter y, double p) {
+    shooter = y;
+    power = p;
+    
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(driveTrain);
+    addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    driveTrain.resetEncoders();
-    driveTrain.configPositionDrive();
+    shooter.set(power);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.driveTicks(encoderTicks);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    driveTrain.resetEncoders();
-    driveTrain.configNormal();
-    driveTrain.drive(0, 0);
+    // shooter.set(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (shooter.getRPM() < power) {
+      done = false;
+    } else {
+      done = true;
+    }
+    SmartDashboard.putBoolean("Shooter on?", done);
     return done;
   }
 }

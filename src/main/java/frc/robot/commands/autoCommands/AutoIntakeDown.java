@@ -5,46 +5,38 @@
 package frc.robot.commands.autoCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Intake;
 
-public class AutoDriveDistance extends CommandBase {
-  private final DriveTrain driveTrain;
+public class AutoIntakeDown extends CommandBase {
+  private final Intake intake;
 
-  private final double encoderTicks;
   private boolean done = false;
 
-  /**
-   * Creates a new AutoDriveDistance.
-   * (drivetrain, wheel circumference (inches), gearbox ratio, distance inches, power)
-   */
-  public AutoDriveDistance(DriveTrain d, double i) {
-    driveTrain = d;
-    encoderTicks = (i / Constants.wheelCircumference) * 4096;
+  /** Creates a new AutoIntake. */
+  public AutoIntakeDown(Intake i) {
+    intake = i;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(driveTrain);
+    addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    driveTrain.resetEncoders();
-    driveTrain.configPositionDrive();
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.driveTicks(encoderTicks);
+    intake.setDown();
+    done = true;
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    driveTrain.resetEncoders();
-    driveTrain.configNormal();
-    driveTrain.drive(0, 0);
+
   }
 
   // Returns true when the command should end.

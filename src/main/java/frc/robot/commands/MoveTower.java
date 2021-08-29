@@ -7,33 +7,27 @@
 
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Tower;
-
-import java.util.function.BooleanSupplier;
 
 public class MoveTower extends CommandBase {
   private final Tower tower;
 
-  private final BooleanSupplier upButton;
   private final BooleanSupplier upButton2;
-  private final BooleanSupplier upButton3;
-  private final BooleanSupplier downButton;
+  private final BooleanSupplier upButton4;
   private final BooleanSupplier downButton2;
-  private final BooleanSupplier downButton3;
 
   /**
    * Creates a new MoveTower.
    */
-  public MoveTower(Tower t, BooleanSupplier rightBumper, BooleanSupplier xButton, 
-  BooleanSupplier leftBumper, BooleanSupplier stickTrigger, BooleanSupplier aButton, BooleanSupplier stick3) {
+  public MoveTower(Tower t, BooleanSupplier xButton, 
+   BooleanSupplier stickTrigger,BooleanSupplier stick3) {
     tower = t;
-    upButton = rightBumper;
     upButton2 = xButton;
-    upButton3 = leftBumper;
-    downButton = stickTrigger;
-    downButton2 = aButton;
-    downButton3 = stick3;
+    upButton4 = stickTrigger;
+    downButton2 = stick3;
     
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(tower);
@@ -47,9 +41,9 @@ public class MoveTower extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (upButton.getAsBoolean() || upButton2.getAsBoolean() || upButton3.getAsBoolean())  {
+    if (upButton2.getAsBoolean() || upButton4.getAsBoolean())  {
       tower.set(-.5);
-    } else if (downButton.getAsBoolean() || downButton2.getAsBoolean() || downButton3.getAsBoolean()) {
+    } else if (downButton2.getAsBoolean()) {
       tower.set(.5);
     } else {
       tower.set(0);

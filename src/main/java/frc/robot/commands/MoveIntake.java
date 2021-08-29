@@ -17,15 +17,19 @@ public class MoveIntake extends CommandBase {
   private final BooleanSupplier toggle;
   private final BooleanSupplier in;
   private final BooleanSupplier out;
+  private final BooleanSupplier down;
+  private final BooleanSupplier up;
 
   /** Creates a new MoveIntake. */
-  public MoveIntake(Intake i, DoubleSupplier a, BooleanSupplier b, BooleanSupplier t, BooleanSupplier i2, BooleanSupplier o) {
+  public MoveIntake(Intake i, DoubleSupplier a, BooleanSupplier b, BooleanSupplier t, BooleanSupplier i2, BooleanSupplier o, BooleanSupplier d, BooleanSupplier u) {
     intake = i;
     axis = a;
     button = b;
     toggle = t;
     in = i2;
     out = o;
+    down = d;
+    up = u;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake);
@@ -53,6 +57,12 @@ public class MoveIntake extends CommandBase {
     boolean t = toggle.getAsBoolean();
     if (t) {
       intake.toggle();
+    }
+    if (down.getAsBoolean()) {
+      intake.setUp();
+    }
+    if (up.getAsBoolean()) {
+      intake.setDown();
     }
   }
 

@@ -15,7 +15,6 @@ public class ShootShooter extends CommandBase {
   private final Shooter shooter;
 
   private final BooleanSupplier shoot;
-  private final BooleanSupplier shoot2;
   private final IntSupplier POV;
 
   private double power = 0.55;
@@ -23,10 +22,9 @@ public class ShootShooter extends CommandBase {
   private boolean didSet = false;
 
   /** Creates a new ShootShooter. */
-  public ShootShooter(Shooter s, BooleanSupplier b, IntSupplier p, BooleanSupplier b2) {
+  public ShootShooter(Shooter s, BooleanSupplier b, IntSupplier p/*, BooleanSupplier b2*/) {
     shooter = s;
     shoot = b;
-    shoot2 = b2;
     POV = p;
 
     // Use addRequirements() here to declare subsystem dependencies.
@@ -54,7 +52,7 @@ public class ShootShooter extends CommandBase {
       didSet = true;
     }
     
-    boolean toggleShoot = shoot.getAsBoolean() || shoot2.getAsBoolean();
+    boolean toggleShoot = shoot.getAsBoolean();
     if (toggleShoot) {
       shooting = !shooting;
     }
