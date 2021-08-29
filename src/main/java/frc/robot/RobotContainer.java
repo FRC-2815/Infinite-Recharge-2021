@@ -44,7 +44,7 @@ public class RobotContainer {
   private ShootShooter shootShooter;
   private MoveIntake moveIntake;
   private Climb climb;
-  private Aim aim;
+  // private Aim aim;
 
   public RobotContainer() {
     setup();
@@ -81,7 +81,7 @@ public class RobotContainer {
 
     climb = new Climb(climber, () -> stick.getRawButtonPressed(11), () -> stick.getRawButtonPressed(12));
 
-    aim = new Aim(stick.getRawButton(9));
+    // aim = new Aim(stick.getRawButton(9));
     
     driveTrain.setDefaultCommand(drive);
     tower.setDefaultCommand(moveTower);

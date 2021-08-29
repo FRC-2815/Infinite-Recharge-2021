@@ -66,8 +66,8 @@ public class Drive extends CommandBase {
   private double distance;
   private double rA; //relative angle
   private double kPAim = .08;
-  private double kIAim;
-  private double kDAim;
+  // private double kIAim;
+  // private double kDAim;
   private double maxRPM = 5200;
   private double forward;
   private double encoderTicks;
